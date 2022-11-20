@@ -2,7 +2,9 @@ There are no extra steps necessary to run this application.
 It only needs an internet connection for the first build,
 like all other flutter applications.
 
-Please forgive the minor blink issue with the grid items animation. The package used (flutter_reorderable_grid_view) plans to fix the issue on the next update.
+Minor iisues:
+    - Splash screen displays only app logo, so a custom splash screen will have to be implemented
+    - Custom grid_view rebuild issue. Package author has noted that it will be fixed in an upcoming update.
 
 References packages:
     dartz: ^0.10.1
