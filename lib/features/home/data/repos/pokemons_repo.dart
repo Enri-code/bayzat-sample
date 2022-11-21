@@ -21,12 +21,15 @@ class PokemonsRepoImpl extends IPokemonsRepo {
       );
 
       if (result.statusCode == 200) {
-        final data = result.data['results'] as List;
+        final data = (result.data['results'] as List).cast<Map>();
 
         final pokemonData = await Future.wait(
           data.map((e) => _client.get(e['url']).then((res) => res.data)),
         );
-        return Right(pokemonData.map((e) => converter(e)).toList());
+
+        return Right(
+          pokemonData.cast<Map<String, dynamic>>().map(converter).toList(),
+        );
       }
 
       return const Left(AppError());
@@ -45,7 +48,9 @@ class PokemonsRepoImpl extends IPokemonsRepo {
         eagerError: true,
       );
 
-      return Right(pokemonData.map((e) => converter(e)).toList());
+      return Right(
+        pokemonData.cast<Map<String, dynamic>>().map(converter).toList(),
+      );
     } catch (_) {
       return const Left(AppError());
     }
